@@ -5,8 +5,8 @@ import Square from '../Square';
 import styles from './styles.module.scss';
 
 class Board extends Component {
-  renderSquare() {
-    return <Square />;
+  renderSquare(value) {
+    return <Square value={value} />;
   }
 
   render() {
