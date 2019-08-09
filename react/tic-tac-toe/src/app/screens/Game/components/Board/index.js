@@ -8,7 +8,8 @@ class Board extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      squares: Array(9).fill(null)
+      squares: Array(9).fill(null),
+      xIsNext: true
     };
   }
 
@@ -17,13 +18,13 @@ class Board extends Component {
   handleValue = (i) => () => {
     this.setState((prevState) => {
       const squares = prevState.squares.slice();
-      squares[i] = 'X';
-      return { squares };
+      squares[i] = prevState.xIsNext ? 'X' : 'O';
+      return { squares, xIsNext: !prevState.xIsNext };
     });
   }
 
   render() {
-    const status = 'Next player: X';
+    const status = `Next player: ${this.state.xIsNext ? 'X' : 'O'}`;
     return (
       <div>
         <div className={styles.status}>{status}</div>
