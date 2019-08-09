@@ -12,11 +12,9 @@ class Board extends Component {
     };
   }
 
-  renderSquare = (i) => (
-    <Square value={this.state.squares[i]} index={i} onClick={this.handleValue} />
-  )
+  renderSquare = (i) => <Square value={this.state.squares[i]} onClick={this.handleValue(i)} />
 
-  handleValue = (i) => {
+  handleValue = (i) => () => {
     this.setState((prevState) => {
       const squares = prevState.squares.slice();
       squares[i] = 'X';
