@@ -24,19 +24,20 @@ class Game extends Component {
   }
 
   handleValue = i => () => {
-    if (!this.state.winner) {
-      this.setState((prevState) => {
-        const { history, xIsNext } = prevState;
-        const historyLength = history.length;
-        const squares = [...history[historyLength - 1].squares];
-        squares[i] = xIsNext ? 'X' : 'O';
-        return {
-          winner: calculateWinner(squares, winnerLines),
-          history: [...history, { squares }],
-          xIsNext: !xIsNext,
-          stepNumber: historyLength
-        };
-      });
+    const { history, winner } = this.state;
+    if (!winner) {
+      const squares = [...history[history.length - 1].squares];
+      if (!squares[i]) {
+        this.setState(({ xIsNext }) => {
+          squares[i] = xIsNext ? 'X' : 'O';
+          return {
+            winner: calculateWinner(squares, winnerLines),
+            history: [...history, { squares }],
+            xIsNext: !xIsNext,
+            stepNumber: history.length
+          };
+        });
+      }
     }
   }
 
