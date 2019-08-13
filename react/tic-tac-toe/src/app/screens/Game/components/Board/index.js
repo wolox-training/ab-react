@@ -6,11 +6,11 @@ import Square from '../Square';
 import styles from './styles.module.scss';
 
 class Board extends Component {
-  renderSquare = (i) => <Square value={this.props.squares[i]} onClick={this.props.onClick(i)} />
+  renderSquare = i => <Square value={this.props.squares[i]} onClick={this.props.onClick(i)} />
 
   render() {
     return (
-      <div>
+      <div className={this.props.style}>
         <div className={styles.boardRow}>
           {this.renderSquare(0)}
           {this.renderSquare(1)}
@@ -32,7 +32,8 @@ class Board extends Component {
 }
 
 Board.propTypes = {
-  squares: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string])),
-  onClick: PropTypes.func
+  onClick: PropTypes.func.isRequired,
+  squares: PropTypes.arrayOf(PropTypes.string),
+  style: PropTypes.string
 };
 export default Board;

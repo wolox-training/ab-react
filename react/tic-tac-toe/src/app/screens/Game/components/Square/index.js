@@ -5,7 +5,7 @@ import styles from './styles.module.scss';
 
 function Square({ onClick, value }) {
   return (
-    <button type="button" className={styles.square} onClick={onClick}>
+    <button type="button" className={styles.square} onClick={value ? undefined : onClick}>
       {value}
     </button>
   );
