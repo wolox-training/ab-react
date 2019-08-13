@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import { calculateWinner } from '../../../utils/utils';
-import { lines } from '../../../constants/constants';
+import { winnerLines } from '../../../constants/constants';
 
 import styles from './styles.module.scss';
 import Board from './components/Board';
@@ -31,7 +31,7 @@ class Game extends Component {
         const squares = [...history[historyLength - 1].squares];
         squares[i] = xIsNext ? 'X' : 'O';
         return {
-          winner: calculateWinner(squares, lines),
+          winner: calculateWinner(squares, winnerLines),
           history: history.concat([{ squares }]),
           xIsNext: !xIsNext,
           stepNumber: historyLength
