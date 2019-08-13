@@ -32,7 +32,7 @@ class Game extends Component {
         squares[i] = xIsNext ? 'X' : 'O';
         return {
           winner: calculateWinner(squares, winnerLines),
-          history: history.concat([{ squares }]),
+          history: [...history, { squares }],
           xIsNext: !xIsNext,
           stepNumber: historyLength
         };
