@@ -2,6 +2,9 @@ import React, { Component, Fragment } from 'react';
 import store from '@redux/store';
 import Navbar from '@components/Navbar';
 import Footer from '@components/Footer';
+import { connect } from 'react-redux';
+
+import actionsCreators from '../../../redux/book/actions';
 
 import Book from './components/Book';
 import Search from './components/Search';
@@ -16,9 +19,10 @@ class App extends Component {
 
   componentDidMount() {
     store.subscribe(() => {
-      const { books, bookSelected } = store.getState();
+      const { originalData: books, bookSelected } = store.getState();
       this.setState({ books, bookSelected });
     });
+    store.dispatch(actionsCreators.getBooks());
     // TODO to implement the dispatch
   }
 
