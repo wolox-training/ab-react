@@ -1,8 +1,8 @@
 import React, { Component, Fragment } from 'react';
-import store from '@redux/store';
 import Navbar from '@components/Navbar';
 import Footer from '@components/Footer';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 import actionsCreators from '../../../redux/book/actions';
 
@@ -16,18 +16,15 @@ class App extends Component {
     books: [],
     bookSelected: []
   };
-
   componentDidMount() {
-    store.subscribe(() => {
-      const { originalData: books, bookSelected } = store.getState();
-      this.setState({ books, bookSelected });
-    });
-    store.dispatch(actionsCreators.getBooks());
+    this.props.getBooks();
     // TODO to implement the dispatch
   }
 
   // TODO to implement the dispatch
-  onSearch = value => {};
+  onSearch = value => {
+    this.props.onSearch(value);
+  };
 
   // TODO to implement the dispatch
   addToCart = item => {};
@@ -57,13 +54,14 @@ class App extends Component {
   };
 
   render() {
+    const { books } = this.props;
     return (
       <Fragment>
         <Navbar />
         <div className={styles.container}>
           <Search onSearch={this.onSearch} />
-          {this.state.books.length ? (
-            this.state.books.map(this.renderBooks)
+          {books.length ? (
+            books.map(this.renderBooks)
           ) : (
             <div className={styles.noData}>
               <h2 className={styles.title}>No Data</h2>
@@ -79,4 +77,20 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapStateToProps = ({ books }) => ({ books });
+
+const mapDispatchToProps = dispatch => ({
+  onSearch: value => dispatch(actionsCreators.searchBook(value)),
+  getBooks: () => dispatch(actionsCreators.getBooks())
+});
+
+App.propTypes = {
+  books: PropTypes.arrayOf(PropTypes.object),
+  getBooks: PropTypes.func,
+  onSearch: PropTypes.func
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(App);
