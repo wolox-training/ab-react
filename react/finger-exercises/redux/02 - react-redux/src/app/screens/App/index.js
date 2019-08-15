@@ -28,11 +28,6 @@ class App extends Component {
   };
 
   // TODO to implement the dispatch
-  addItem = itemId => {
-    this.props.addItem(itemId);
-  };
-
-  // TODO to implement the dispatch
   removeItem = itemId => {
     this.props.removeItem(itemId);
   };
@@ -70,9 +65,7 @@ class App extends Component {
             </div>
           )}
         </div>
-        {bookSelected.length ? (
-          <ShoppingCart data={bookSelected} addItem={this.addItem} removeItem={this.removeItem} />
-        ) : null}
+        {bookSelected.length ? <ShoppingCart /> : null}
         <Footer />
       </Fragment>
     );
@@ -85,8 +78,7 @@ const mapDispatchToProps = dispatch => ({
   onSearch: value => dispatch(actionsCreators.searchBook(value)),
   getBooks: () => dispatch(actionsCreators.getBooks()),
   addToCart: book => dispatch(actionsCreators.addToCart(book)),
-  removeItem: itemId => dispatch(actionsCreators.removeItem(itemId)),
-  addItem: itemId => dispatch(actionsCreators.addItem(itemId))
+  removeItem: itemId => dispatch(actionsCreators.removeItem(itemId))
 });
 
 App.propTypes = {
@@ -94,9 +86,8 @@ App.propTypes = {
   bookSelected: PropTypes.arrayOf(PropTypes.object),
   getBooks: PropTypes.func,
   onSearch: PropTypes.func,
-  removeItem: PropTypes.func,
-  addItem: PropTypes.func,
-  addToCart: PropTypes.func
+  addToCart: PropTypes.func,
+  removeItem: PropTypes.func
 };
 
 export default connect(
