@@ -10,7 +10,7 @@ class Board extends Component {
 
   render() {
     return (
-      <div className={this.props.style}>
+      <div className={this.props.className}>
         <div className={styles.boardRow}>
           {this.renderSquare(0)}
           {this.renderSquare(1)}
@@ -33,7 +33,7 @@ class Board extends Component {
 
 Board.propTypes = {
   onClick: PropTypes.func.isRequired,
-  squares: PropTypes.arrayOf(PropTypes.string),
-  style: PropTypes.string
+  className: PropTypes.string,
+  squares: PropTypes.arrayOf(PropTypes.string)
 };
 export default Board;
