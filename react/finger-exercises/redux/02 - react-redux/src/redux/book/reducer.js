@@ -13,9 +13,18 @@ function reducer(state = initialState, action) {
     case actions.ADD_TO_CART: // TODO to implement the logic
       return { ...state, bookSelected: [...state.bookSelected, action.payload] };
     case actions.ADD_ITEM: // TODO to implement the logic
-      return { ...state };
+      return {
+        ...state,
+        bookSelected: state.bookSelected.map(book => {
+          book = Object.assign({}, book);
+          if (book.id === action.payload) {
+            book.quantity += 1;
+          }
+          return book;
+        })
+      };
     case actions.REMOVE_ITEM: // TODO to implement the logic
-      return { ...state, bookSelected: state.bookSelected.filter(book => +book.id !== +action.payload) };
+      return { ...state, bookSelected: state.bookSelected.filter(book => book.id !== action.payload) };
     case actions.SEARCH_ITEM: // TODO to implement the logic
       return {
         ...state,
