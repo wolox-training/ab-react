@@ -12,10 +12,6 @@ import ShoppingCart from './components/ShoppingCart';
 import styles from './styles.scss';
 
 class App extends Component {
-  state = {
-    books: [],
-    bookSelected: []
-  };
   componentDidMount() {
     this.props.getBooks();
     // TODO to implement the dispatch
@@ -27,13 +23,19 @@ class App extends Component {
   };
 
   // TODO to implement the dispatch
-  addToCart = item => {};
+  addToCart = item => {
+    this.props.addToCart(item);
+  };
 
   // TODO to implement the dispatch
-  addItem = itemId => {};
+  addItem = itemId => {
+    this.props.addItem(itemId);
+  };
 
   // TODO to implement the dispatch
-  removeItem = itemId => {};
+  removeItem = itemId => {
+    this.props.removeItem(itemId);
+  };
 
   CONFIGURATION_BUTTON = {
     add: {
@@ -48,13 +50,13 @@ class App extends Component {
   };
 
   renderBooks = item => {
-    const showButton = !this.state.bookSelected.some(el => el.id === item.id);
+    const showButton = !this.props.bookSelected.some(el => el.id === item.id);
     const configButton = showButton ? this.CONFIGURATION_BUTTON.add : this.CONFIGURATION_BUTTON.remove;
     return <Book key={item.id} data={item} configButton={configButton} />;
   };
 
   render() {
-    const { books } = this.props;
+    const { books, bookSelected } = this.props;
     return (
       <Fragment>
         <Navbar />
@@ -68,8 +70,8 @@ class App extends Component {
             </div>
           )}
         </div>
-        {this.state.bookSelected.length ? (
-          <ShoppingCart data={this.state.bookSelected} addItem={this.addItem} removeItem={this.removeItem} />
+        {bookSelected.length ? (
+          <ShoppingCart data={bookSelected} addItem={this.addItem} removeItem={this.removeItem} />
         ) : null}
         <Footer />
       </Fragment>
@@ -77,17 +79,24 @@ class App extends Component {
   }
 }
 
-const mapStateToProps = ({ books }) => ({ books });
+const mapStateToProps = ({ books, bookSelected }) => ({ books, bookSelected });
 
 const mapDispatchToProps = dispatch => ({
   onSearch: value => dispatch(actionsCreators.searchBook(value)),
-  getBooks: () => dispatch(actionsCreators.getBooks())
+  getBooks: () => dispatch(actionsCreators.getBooks()),
+  addToCart: book => dispatch(actionsCreators.addToCart(book)),
+  removeItem: itemId => dispatch(actionsCreators.removeItem(itemId)),
+  addItem: itemId => dispatch(actionsCreators.addItem(itemId))
 });
 
 App.propTypes = {
   books: PropTypes.arrayOf(PropTypes.object),
+  bookSelected: PropTypes.arrayOf(PropTypes.object),
   getBooks: PropTypes.func,
-  onSearch: PropTypes.func
+  onSearch: PropTypes.func,
+  removeItem: PropTypes.func,
+  addItem: PropTypes.func,
+  addToCart: PropTypes.func
 };
 
 export default connect(
