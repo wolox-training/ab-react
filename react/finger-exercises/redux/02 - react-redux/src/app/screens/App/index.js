@@ -65,7 +65,7 @@ class App extends Component {
             </div>
           )}
         </div>
-        {bookSelected.length ? <ShoppingCart /> : null}
+        {bookSelected.length && <ShoppingCart />}
         <Footer />
       </Fragment>
     );
