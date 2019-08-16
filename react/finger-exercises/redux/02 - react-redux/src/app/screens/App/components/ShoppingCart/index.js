@@ -22,16 +22,6 @@ class ShoppingCart extends PureComponent {
 
   total = (accumulator, currentValue) => accumulator + currentValue.quantity;
 
-  // TODO to implement the dispatch
-  addItem = itemId => {
-    this.props.addItem(itemId);
-  };
-
-  // TODO to implement the dispatch
-  removeItem = itemId => {
-    this.props.removeItem(itemId);
-  };
-
   renderItem = item => {
     const { addItem, removeItem } = this.props;
     return <Item key={item.id} item={item} addItem={addItem} removeItem={removeItem} />;

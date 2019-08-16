@@ -14,32 +14,16 @@ import styles from './styles.scss';
 class App extends Component {
   componentDidMount() {
     this.props.getBooks();
-    // TODO to implement the dispatch
   }
-
-  // TODO to implement the dispatch
-  onSearch = value => {
-    this.props.onSearch(value);
-  };
-
-  // TODO to implement the dispatch
-  addToCart = item => {
-    this.props.addToCart(item);
-  };
-
-  // TODO to implement the dispatch
-  removeItem = itemId => {
-    this.props.removeItem(itemId);
-  };
 
   CONFIGURATION_BUTTON = {
     add: {
       text: 'Add to cart',
-      function: this.addToCart
+      function: this.props.addToCart
     },
     remove: {
       text: 'Remove',
-      function: this.removeItem,
+      function: this.props.removeItem,
       isDanger: true
     }
   };
@@ -51,12 +35,12 @@ class App extends Component {
   };
 
   render() {
-    const { books, bookSelected } = this.props;
+    const { books, bookSelected, onSearch } = this.props;
     return (
       <Fragment>
         <Navbar />
         <div className={styles.container}>
-          <Search onSearch={this.onSearch} />
+          <Search onSearch={onSearch} />
           {books.length ? (
             books.map(this.renderBooks)
           ) : (
