@@ -2,17 +2,10 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import Square from '../Square';
-import MatchesService from '../../../../../services/MatchesService';
 
 import styles from './styles.module.scss';
 
 class Board extends Component {
-  componentDidMount() {
-    MatchesService.getMatches().then(e => {
-      console.log(e);
-    });
-  }
-
   renderSquare = i => <Square value={this.props.squares[i]} onClick={this.props.onClick(i)} />
 
   render() {

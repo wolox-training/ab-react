@@ -1,0 +1,34 @@
+.table {
+  flex: 1;
+}
+
+.head {
+  display: flex;
+}
+
+.cell {
+  flex: 1;
+  padding: 5px 0;
+}
+
+.head-cell {
+  composes: cell;
+  font-weight: bold;
+}
+
+.body {
+  height: 100%;
+  overflow-y: auto;
+  position: relative;
+}
+
+.match {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.spinner {
+  left: 50%;
+  position: absolute;
+  top: 50%;
+}

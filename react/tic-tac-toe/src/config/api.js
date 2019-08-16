@@ -1,8 +1,8 @@
 import { create } from 'apisauce';
 
 const api = create({
-  baseURL: process.env.API_BASE_URL,
-  timeout: 5000
+  baseURL: process.env.REACT_APP_API_BASE_URL,
+  timeout: 50000
 });
 
 export default api;
