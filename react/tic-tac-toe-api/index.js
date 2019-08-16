@@ -3,7 +3,7 @@ const server = jsonServer.create();
 const router = jsonServer.router('db.json');
 const middlewares = jsonServer.defaults();
 
-const port = process.env.PORT || 3005;
+const port = process.env.PORT || 3005;
 const isAuthorized = req => router.db.get('users').find({ token: req.headers.authorization }).value();
 
 server.use(middlewares);
@@ -14,7 +14,9 @@ server.use((req, res, next) => {
   if (req.method == 'POST' && req.path == '/matches' && !isAuthorized(req)) {
     res.sendStatus(401);
   } else {
-    next();
+    res.setTimeout(5000, () => {
+      next();
+    });
   }
 })
 
