@@ -17,7 +17,7 @@ export const actions = {
 const actionsCreators = {
   getBooks: () => ({
     type: actions.GET_BOOKS,
-    payload: DATA
+    payload: { data: DATA }
   }),
   addToCart: item => ({
     type: actions.ADD_TO_CART,
