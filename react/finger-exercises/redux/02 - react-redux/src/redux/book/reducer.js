@@ -15,10 +15,13 @@ function reducer(state = initialState, action) {
     case actions.ADD_ITEM: // TODO to implement the logic
       return {
         ...state,
-        bookSelected: state.bookSelected.reduce((acum, curr) => {
-          curr = curr.id === action.payload ? { ...curr, quantity: curr.quantity + 1 } : curr;
-          return [...acum, curr];
-        }, [])
+        bookSelected: state.bookSelected.reduce(
+          (acum, curr) => [
+            ...acum,
+            curr.id === action.payload ? { ...curr, quantity: curr.quantity + 1 } : curr
+          ],
+          []
+        )
       };
     case actions.REMOVE_ITEM: // TODO to implement the logic
       return { ...state, bookSelected: state.bookSelected.filter(book => book.id !== action.payload) };
