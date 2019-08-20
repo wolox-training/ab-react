@@ -2,6 +2,9 @@ import React, { PureComponent, Fragment } from 'react';
 import { arrayOf, func } from 'prop-types';
 import { bookSelectedPropType } from '@constants/propTypes';
 import Button from '@components/Button';
+import { connect } from 'react-redux';
+
+import actionsCreators from '../../../../../redux/book/actions';
 
 import Item from './components/Item';
 import styles from './styles.scss';
@@ -47,4 +50,14 @@ ShoppingCart.propTypes = {
   removeItem: func.isRequired
 };
 
-export default ShoppingCart;
+const mapStateToProps = ({ bookSelected }) => ({ data: bookSelected });
+
+const mapDispatchToProps = dispatch => ({
+  removeItem: itemId => dispatch(actionsCreators.removeItem(itemId)),
+  addItem: itemId => dispatch(actionsCreators.addItem(itemId))
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ShoppingCart);
