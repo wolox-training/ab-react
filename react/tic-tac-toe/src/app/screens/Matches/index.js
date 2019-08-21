@@ -11,10 +11,12 @@ import styles from './styles.module.scss';
 
 class Matches extends Component {
   componentDidMount() {
-    MatchesService.getMatches().then(({ data }) => {
-      this.props.loadData(data);
-    });
+    this.props.dispatch(this.loadData());
   }
+
+  loadData = () => dispatch => MatchesService.getMatches().then(({ data }) => {
+    dispatch(actionsCreators.getMatches(data));
+  });
 
   render() {
     const { data } = this.props;
@@ -39,13 +41,9 @@ class Matches extends Component {
 }
 
 const mapStateToProps = ({ data }) => ({ data });
-const mapDispatchToProps = dispatch => ({
-  loadData: data => dispatch(actionsCreators.getMatches(data))
-});
 
 Matches.propTypes = {
-  loadData: PropTypes.func.isRequired,
   data: PropTypes.arrayOf(PropTypes.object)
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Matches);
+export default connect(mapStateToProps)(Matches);
