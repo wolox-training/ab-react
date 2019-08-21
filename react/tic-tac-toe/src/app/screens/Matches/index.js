@@ -1,23 +1,23 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import Spinner from 'react-spinkit';
+import PropTypes from 'prop-types';
 
 import MatchesService from '../../../services/MatchesService';
+import actionsCreators from '../../../redux/Matches/actions';
 
 import styles from './styles.module.scss';
 
-class Matches extends Component {
-  state = {
-    data: []
-  }
 
+class Matches extends Component {
   componentDidMount() {
     MatchesService.getMatches().then(({ data }) => {
-      this.setState({ data });
+      this.props.loadData(data);
     });
   }
 
   render() {
-    const { data } = this.state;
+    const { data } = this.props;
     return (
       <div className={styles.table}>
         <div className={styles.head}>
@@ -38,4 +38,14 @@ class Matches extends Component {
   }
 }
 
-export default Matches;
+const mapStateToProps = ({ data }) => ({ data });
+const mapDispatchToProps = dispatch => ({
+  loadData: data => dispatch(actionsCreators.getMatches(data))
+});
+
+Matches.propTypes = {
+  loadData: PropTypes.func.isRequired,
+  data: PropTypes.arrayOf(PropTypes.object)
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Matches);
