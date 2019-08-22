@@ -3,20 +3,15 @@ import { connect } from 'react-redux';
 import Spinner from 'react-spinkit';
 import PropTypes from 'prop-types';
 
-import MatchesService from '../../../services/MatchesService';
-import actionsCreators from '../../../redux/Matches/actions';
+import matchesActions from '../../../redux/Matches/actions';
 
 import styles from './styles.module.scss';
 
 
 class Matches extends Component {
   componentDidMount() {
-    this.props.dispatch(this.loadData());
+    this.props.getMatches();
   }
-
-  loadData = () => dispatch => MatchesService.getMatches().then(({ data }) => {
-    dispatch(actionsCreators.getMatches(data));
-  });
 
   render() {
     const { data } = this.props;
@@ -43,7 +38,14 @@ class Matches extends Component {
 const mapStateToProps = ({ data }) => ({ data });
 
 Matches.propTypes = {
+  getMatches: PropTypes.func.isRequired,
   data: PropTypes.arrayOf(PropTypes.object)
 };
 
-export default connect(mapStateToProps)(Matches);
+const mapDispatchToProps = dispatch => ({
+  getMatches: () => {
+    dispatch(matchesActions.fetchMatches(dispatch));
+  }
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Matches);

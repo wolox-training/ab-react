@@ -6,7 +6,7 @@ const defaultState = {
 
 function reducer(state = defaultState, action) {
   switch (action.type) {
-    case actions.GET_MATCHES:
+    case actions.LOAD_MATCHES:
       return { ...state, data: action.payload.data };
     default:
       return state;
