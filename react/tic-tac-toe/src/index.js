@@ -17,10 +17,10 @@ const render = () => {
     <AppContainer>
       <Provider store={store}>
         <Router>
-          <div>
+          <>
             <Route path="/" exact component={App} />
             <Route path="/login" component={Login} />
-          </div>
+          </>
         </Router>
       </Provider>
     </AppContainer>,

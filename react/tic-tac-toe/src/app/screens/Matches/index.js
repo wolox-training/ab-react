@@ -35,7 +35,7 @@ class Matches extends Component {
   }
 }
 
-const mapStateToProps = ({ data }) => ({ data });
+const mapStateToProps = ({ matches: { data } }) => ({ data });
 
 const mapDispatchToProps = dispatch => ({
   getMatches: () => {

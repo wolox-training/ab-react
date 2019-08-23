@@ -1,13 +1,18 @@
 import React, { Component } from 'react';
 
+import FormLogin from './components/FormLogin/FormLogin';
+
 class Login extends Component {
-  refInput = React.createRef()
+  handleSubmit = (values) => {
+    console.log(values);
+  }
 
   render() {
     return (
-      <form>
-        <input type="text" placeholder="Login" />
-      </form>
+      <>
+        <div>Welcome</div>
+        <FormLogin onSubmit={this.handleSubmit} />
+      </>
     );
   }
 }
