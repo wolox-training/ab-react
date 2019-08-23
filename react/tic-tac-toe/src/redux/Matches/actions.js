@@ -16,7 +16,10 @@ const getMatches = () => ({
 
 const fetchMatches = () => async (dispatch) => {
   dispatch(getMatches());
-  await MatchesService.getMatches().then(({ data }) => dispatch(loadMatches(data)));
+  const { ok, data } = await MatchesService.getMatches();
+  if (ok) {
+    dispatch(loadMatches(data));
+  }
 };
 
 export default { fetchMatches };
