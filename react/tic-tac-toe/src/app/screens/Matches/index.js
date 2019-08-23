@@ -37,15 +37,15 @@ class Matches extends Component {
 
 const mapStateToProps = ({ data }) => ({ data });
 
+const mapDispatchToProps = dispatch => ({
+  getMatches: () => {
+    dispatch(matchesActions.fetchMatches());
+  }
+});
+
 Matches.propTypes = {
   getMatches: PropTypes.func.isRequired,
   data: PropTypes.arrayOf(PropTypes.object)
 };
-
-const mapDispatchToProps = dispatch => ({
-  getMatches: () => {
-    dispatch(matchesActions.fetchMatches(dispatch));
-  }
-});
 
 export default connect(mapStateToProps, mapDispatchToProps)(Matches);
