@@ -2,19 +2,23 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
 import { Provider } from 'react-redux';
+import { ConnectedRouter } from 'connected-react-router';
+
 import './config/i18n';
 import './scss/application.scss';
-
-import App from './app';
+import configureStore, { history } from './redux/store';
 import { register } from './serviceWorker';
-import store from './redux/store';
+import App from './app';
 
+const store = configureStore();
 
 const render = () => {
   ReactDOM.render(
     <AppContainer>
       <Provider store={store}>
-        <App />
+        <ConnectedRouter history={history}>
+          <App />
+        </ConnectedRouter>
       </Provider>
     </AppContainer>,
     document.getElementById('root')
