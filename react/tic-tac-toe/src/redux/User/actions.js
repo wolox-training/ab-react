@@ -30,6 +30,8 @@ const login = (values) => async (dispatch) => {
     localStore.setValue('token', token);
     dispatch(loginSuccess());
   } else {
+    // eslint-disable-next-line no-alert
+    window.alert('Nombre de usuario y contraseña no coinciden');
     dispatch(loginFailure());
   }
 };
