@@ -12,11 +12,13 @@ const loginRequest = () => ({
 });
 
 const loginSuccess = () => ({
-  type: actions.SUCCESS_LOGIN
+  type: actions.SUCCESS_LOGIN,
+  payload: true
 });
 
 const loginFailure = () => ({
-  type: actions.FAILURE_LOGIN
+  type: actions.FAILURE_LOGIN,
+  payload: false
 });
 
 

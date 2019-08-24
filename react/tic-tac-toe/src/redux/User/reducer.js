@@ -1,13 +1,14 @@
 import { actions } from './actions';
 
 const defaultState = {
-  data: []
+  isLogged: false
 };
 
 function reducer(state = defaultState, action) {
   switch (action.type) {
-    case actions.LOAD_MATCHES:
-      return { ...state, data: action.payload.data };
+    case actions.SUCCESS_LOGIN:
+    case actions.FAILURE_LOGIN:
+      return { ...state, isLogged: action.payload };
     default:
       return state;
   }
