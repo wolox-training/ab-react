@@ -8,3 +8,5 @@ export const winnerLines = [
   [0, 4, 8],
   [2, 4, 6]
 ];
+
+export const headers = { headers: { Accept: 'application/json', 'Content-Type': 'application/json' } };

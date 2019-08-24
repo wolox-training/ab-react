@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
-import { calculateWinner } from '../../../utils/utils';
-import { winnerLines } from '../../../constants/constants';
+import { calculateWinner } from '../../../../../utils/utils';
+import { winnerLines } from '../../../../../constants/constants';
 
 import styles from './styles.module.scss';
 import Board from './components/Board';

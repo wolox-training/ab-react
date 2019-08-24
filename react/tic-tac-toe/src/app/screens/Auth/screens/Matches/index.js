@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import Spinner from 'react-spinkit';
 import PropTypes from 'prop-types';
 
-import matchesActions from '../../../redux/Matches/actions';
+import matchesActions from '../../../../../redux/Matches/actions';
 
 import styles from './styles.module.scss';
 
