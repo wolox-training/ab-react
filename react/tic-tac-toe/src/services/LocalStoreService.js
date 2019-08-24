@@ -3,7 +3,7 @@ export default class LocalStorageService {
 
   SESSION_TOKEN = 'sessionToken';
 
-  getValue(key) {
+  static getValue(key) {
     const encodedKey = window.btoa(`@@AUTH:${key}`);
     let encodedValue = '';
     try {

@@ -14,10 +14,10 @@ class Login extends Component {
 
   render() {
     return (
-      <>
+      <div>
         <div>Welcome</div>
         <FormLogin onSubmit={this.handleSubmit} />
-      </>
+      </div>
     );
   }
 }
