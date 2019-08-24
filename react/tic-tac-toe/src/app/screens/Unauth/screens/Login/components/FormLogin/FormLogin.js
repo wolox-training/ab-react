@@ -2,7 +2,7 @@ import React from 'react';
 import { Field, reduxForm } from 'redux-form';
 import PropTypes from 'prop-types';
 
-import { email, required } from '../../../../../../../utils/validations';
+import { email, required, minLength } from '../../../../../../../utils/validations';
 import Input from '../../../../../../components/form-controls/Input/Input';
 
 import styles from './styles.module.scss';
@@ -20,7 +20,7 @@ function FormLogin({ handleSubmit }) {
       <Field
         name="password"
         component={Input}
-        validate={required}
+        validate={[required, minLength(8)]}
         label="Password"
         type="password"
       />
