@@ -6,11 +6,13 @@ import PropTypes from 'prop-types';
 import Login from './screens/Login';
 
 function Unauth({ match, isLogged }) {
-  return (
-    isLogged ? <Redirect to="/" />
-      : <>
-        <Route path={`${match.path}/login`} component={Login} />
-      </>);
+  return isLogged ? (
+    <Redirect to="/" />
+  ) : (
+    <>
+      <Route path={`${match.path}/login`} component={Login} />
+    </>
+  );
 }
 
 const mapStateToProps = ({ user: { isLogged } }) => ({
@@ -22,4 +24,7 @@ Unauth.propTypes = {
   match: PropTypes.objectOf(PropTypes.any)
 };
 
-export default connect(mapStateToProps, null)(Unauth);
+export default connect(
+  mapStateToProps,
+  null
+)(Unauth);

@@ -6,16 +6,14 @@ import PropTypes from 'prop-types';
 import Game from './screens/Game';
 import Matches from './screens/Matches';
 
-
 function Auth({ isLogged }) {
-  return (
-    isLogged
-      ? <>
-        <Game />
-        <Matches />
-      </>
-      : <Redirect to="/unauth/login" />
-
+  return isLogged ? (
+    <>
+      <Game />
+      <Matches />
+    </>
+  ) : (
+    <Redirect to="/unauth/login" />
   );
 }
 
@@ -27,4 +25,7 @@ Auth.propTypes = {
   isLogged: PropTypes.bool
 };
 
-export default connect(mapStateToProps, null)(Auth);
+export default connect(
+  mapStateToProps,
+  null
+)(Auth);
