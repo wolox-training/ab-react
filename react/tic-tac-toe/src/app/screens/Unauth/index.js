@@ -3,13 +3,11 @@ import { connect } from 'react-redux';
 import { Route, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-import LocalStoreServie from '../../../services/LocalStoreService';
-
 import Login from './screens/Login';
 
 function Unauth({ match, isLogged }) {
   return (
-    LocalStoreServie.getValue('token') && isLogged ? <Redirect to="/" />
+    isLogged ? <Redirect to="/" />
       : <>
         <Route path={`${match.path}/login`} component={Login} />
       </>);
