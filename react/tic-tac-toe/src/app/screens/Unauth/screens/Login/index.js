@@ -8,7 +8,7 @@ import FormLogin from './components/FormLogin/FormLogin';
 
 
 class Login extends Component {
-  handleSubmit = (values) => {
+  handleSubmit = values => {
     this.props.login(values);
   }
 
@@ -26,7 +26,7 @@ class Login extends Component {
 // const mapStateToProps = ({ matches: { data } }) => ({ data });
 
 const mapDispatchToProps = dispatch => ({
-  login: (data) => {
+  login: data => {
     dispatch(userActions.login(data));
   }
 });

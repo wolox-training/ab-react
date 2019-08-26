@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 
 import Auth from './screens/Auth/index';
 import Unauth from './screens/Unauth/index';
@@ -10,8 +10,10 @@ function App() {
   return (
     <div className={styles.container}>
       <>
-        <Route path="/" exact component={Auth} />
-        <Route path="/unauth" component={Unauth} />
+        <Switch>
+          <Route path="/" exact component={Auth} />
+          <Route path="/unauth" component={Unauth} />
+        </Switch>
       </>
     </div>
   );
