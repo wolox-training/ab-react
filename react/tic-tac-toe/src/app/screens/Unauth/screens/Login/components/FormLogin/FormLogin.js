@@ -20,7 +20,7 @@ function FormLogin({ handleSubmit }) {
       <Field
         name="password"
         component={Input}
-        validate={[required, minLength(8)]}
+        validate={[required, minLength]}
         label="Password"
         type="password"
       />

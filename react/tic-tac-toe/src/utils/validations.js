@@ -4,4 +4,4 @@ export const email = value =>
 
 export const required = value => value ? undefined : 'Requerido';
 
-export const minLength = length => value => value.length >= length ? undefined : 'La contraseña debe tener por lo menos 8 caracteres';
+export const minLength = value => value.length >= 8 ? undefined : 'La contraseña debe tener por lo menos 8 caracteres';
