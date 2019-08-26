@@ -43,4 +43,10 @@ const login = values => async dispatch => {
   dispatch(isLogged(ok));
 };
 
-export default { login, isLogged };
+const logged = () => async dispatch => {
+  const token = await LocalStoreService.getValue('token');
+  AuthService.setToken(token);
+  dispatch(isLogged(!!token));
+};
+
+export default { login, logged };

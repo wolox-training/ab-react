@@ -3,21 +3,19 @@ import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import LocalStoreServie from '../../../services/LocalStoreService';
-import AuthService from '../../../services/AuthService';
 import actionsUser from '../../../redux/User/actions';
 
 import Game from './screens/Game';
 import Matches from './screens/Matches';
 
 
-function Auth({ isLogged }) {
-  const token = LocalStoreServie.getValue('token');
-  AuthService.setToken(token);
-  isLogged(!!token);
+function Auth({ isLogged, logged }) {
+  if (!isLogged) {
+    logged();
+  }
 
   return (
-    token
+    isLogged
       ? <>
         <Game />
         <Matches />
@@ -28,11 +26,16 @@ function Auth({ isLogged }) {
 }
 
 const mapDispatchToProps = dispatch => ({
-  isLogged: value => dispatch(actionsUser.isLogged(value))
+  logged: () => dispatch(actionsUser.logged())
+});
+
+const mapStateToProps = state => ({
+  isLogged: state.user.isLogged
 });
 
 Auth.propTypes = {
-  isLogged: PropTypes.func
+  isLogged: PropTypes.bool,
+  logged: PropTypes.func
 };
 
-export default connect(null, mapDispatchToProps)(Auth);
+export default connect(mapStateToProps, mapDispatchToProps)(Auth);
