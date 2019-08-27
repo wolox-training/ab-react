@@ -1,27 +1,29 @@
 import React, { Component } from 'react';
 
-import { calculateWinner } from '../../../../../utils/utils';
-import { winnerLines } from '../../../../../constants/constants';
+import { calculateWinner } from '../../../utils/utils';
+import { winnerLines } from '../../../constants/constants';
 
 import styles from './styles.module.scss';
 import Board from './components/Board';
 
 class Game extends Component {
   state = {
-    history: [{
-      squares: Array(9).fill(null)
-    }],
+    history: [
+      {
+        squares: Array(9).fill(null)
+      }
+    ],
     xIsNext: true,
     stepNumber: 0,
     winner: ''
-  }
+  };
 
   handleJumpTo = stepNumber => () => {
     this.setState({
       stepNumber,
       xIsNext: stepNumber % 2 === 0
     });
-  }
+  };
 
   handleValue = i => () => {
     const { history, winner } = this.state;
@@ -39,7 +41,7 @@ class Game extends Component {
         });
       }
     }
-  }
+  };
 
   render() {
     const { winner, history, stepNumber, xIsNext } = this.state;
@@ -50,7 +52,9 @@ class Game extends Component {
       const desc = `${move ? `Go to move # ${move}` : 'Go to game start'}`;
       return (
         <li key={step.squares.toString()}>
-          <button type="button" onClick={this.handleJumpTo(move)}>{desc}</button>
+          <button type="button" onClick={this.handleJumpTo(move)}>
+            {desc}
+          </button>
         </li>
       );
     });

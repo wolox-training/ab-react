@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import actionsUser from '../redux/User/actions';
 
-import Auth from './screens/Auth/index';
-import Unauth from './screens/Unauth/index';
+import PrivateRoute from './components/PrivateRoute';
 import '../scss/application.scss';
 import styles from './styles.module.scss';
+import Login from './screens/Login';
 
 class App extends Component {
   componentDidMount() {
@@ -19,8 +19,8 @@ class App extends Component {
     return (
       <div className={styles.container}>
         <Switch>
-          <Route path="/" exact component={Auth} />
-          <Route path="/unauth" component={Unauth} />
+          <Route path="/" exact component={Login} />
+          <PrivateRoute path="/matches" />
         </Switch>
       </div>
     );
@@ -35,7 +35,9 @@ App.propTypes = {
   logged: PropTypes.func
 };
 
-export default connect(
-  null,
-  mapDispatchToProps
-)(App);
+export default withRouter(
+  connect(
+    null,
+    mapDispatchToProps
+  )(App)
+);

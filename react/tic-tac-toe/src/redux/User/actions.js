@@ -1,3 +1,5 @@
+import { SubmissionError } from 'redux-form';
+
 import AuthService from '../../services/AuthService';
 import LocalStoreService from '../../services/LocalStoreService';
 
@@ -8,17 +10,12 @@ export const actions = {
   IS_LOGGED: '@@USER/IS_LOGGED'
 };
 
-const loginRequest = () => ({
-  type: actions.POST_LOGIN
-});
-
 const loginSuccess = () => ({
   type: actions.SUCCESS_LOGIN
 });
 
 const loginFailure = () => ({
-  type: actions.FAILURE_LOGIN,
-  payload: false
+  type: actions.FAILURE_LOGIN
 });
 
 const isLogged = value => ({
@@ -26,19 +23,19 @@ const isLogged = value => ({
   payload: value
 });
 
-
 const login = values => async dispatch => {
-  dispatch(loginRequest());
-  const { ok, data: { token } } = await AuthService.login(values);
+  const {
+    ok,
+    data: { token }
+  } = await AuthService.login(values);
   if (ok) {
     const localStore = new LocalStoreService();
     localStore.setValue('token', token);
     AuthService.setToken(token);
     dispatch(loginSuccess());
   } else {
-    // eslint-disable-next-line no-alert
-    window.alert('Nombre de usuario y contraseña no coinciden');
     dispatch(loginFailure());
+    throw new SubmissionError({ _error: 'Nombre de usuario y contraseña no coinciden' });
   }
   dispatch(isLogged(ok));
 };
