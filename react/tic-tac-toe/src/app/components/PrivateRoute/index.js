@@ -6,12 +6,14 @@ import PropTypes from 'prop-types';
 import Matches from '../../screens/Matches';
 import Game from '../../screens/Game';
 
-const PrivateComponent = () => (
-  <>
-    <Game />
-    <Matches />
-  </>
-);
+function PrivateComponent() {
+  return (
+    <>
+      <Game />
+      <Matches />
+    </>
+  );
+}
 
 function PrivateRoute({ path, isLogged }) {
   return isLogged ? <Route path={`${path}`} component={PrivateComponent} /> : <Redirect to="/" />;
