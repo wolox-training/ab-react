@@ -9,20 +9,22 @@ import styles from './styles.module.scss';
 
 function FormLogin({ handleSubmit, error }) {
   return (
-    <form onSubmit={handleSubmit} method="post">
-      <Field name="email" validate={[required, email]} component={Input} label="Email" type="text" />
-      <Field
-        name="password"
-        component={Input}
-        validate={[required, minLength]}
-        label="Password"
-        type="password"
-      />
-      {error && error}
-      <button type="submit" className={styles.btnSubmit}>
-        Login
-      </button>
-    </form>
+    <>
+      <form onSubmit={handleSubmit} method="post">
+        <Field name="email" validate={[required, email]} component={Input} label="Email" type="text" />
+        <Field
+          name="password"
+          component={Input}
+          validate={[required, minLength]}
+          label="Password"
+          type="password"
+        />
+        <button type="submit" className={styles.btnSubmit}>
+          Login
+        </button>
+      </form>
+      {error && <span>{error}</span>}
+    </>
   );
 }
 
