@@ -1,31 +1,15 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { Route, Redirect } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-import Matches from '../../screens/Matches';
-import Game from '../../screens/Game';
+import Home from '../../screens/Home';
 
-function PrivateComponent() {
-  return (
-    <>
-      <Game />
-      <Matches />
-    </>
-  );
+function PrivateRoute({ isLogged }) {
+  return isLogged ? <Home /> : <Redirect to="/" />;
 }
-
-function PrivateRoute({ path, isLogged }) {
-  return isLogged ? <Route path={`${path}`} component={PrivateComponent} /> : <Redirect to="/" />;
-}
-
-const mapStateToProps = ({ user: { isLogged } }) => ({
-  isLogged
-});
 
 PrivateRoute.propTypes = {
-  isLogged: PropTypes.bool,
-  path: PropTypes.string
+  isLogged: PropTypes.bool
 };
 
-export default connect(mapStateToProps)(PrivateRoute);
+export default PrivateRoute;

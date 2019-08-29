@@ -4,23 +4,30 @@ import AuthService from '../../services/AuthService';
 import LocalStoreService from '../../services/LocalStoreService';
 
 export const actions = {
-  POST_LOGIN: '@@USER/POST_LOGIN',
   SUCCESS_LOGIN: '@@USER/SUCCESS_LOGIN',
   FAILURE_LOGIN: '@@USER/FAILURE_LOGIN',
-  IS_LOGGED: '@@USER/IS_LOGGED'
+  IS_LOGGED: '@@USER/IS_LOGGED',
+  VALIDATE_SESSION: '@@USER/VALIDATE_SESSION'
 };
 
 const loginSuccess = () => ({
-  type: actions.SUCCESS_LOGIN
+  type: actions.SUCCESS_LOGIN,
+  payload: { isLogged: true }
+});
+
+const validateSession = () => ({
+  type: actions.VALIDATE_SESSION,
+  payload: { loading: true }
 });
 
 const loginFailure = () => ({
-  type: actions.FAILURE_LOGIN
+  type: actions.FAILURE_LOGIN,
+  payload: { isLogged: false }
 });
 
 const isLogged = value => ({
   type: actions.IS_LOGGED,
-  payload: value
+  payload: { isLogged: value, loading: false }
 });
 
 const login = values => async dispatch => {
@@ -37,10 +44,10 @@ const login = values => async dispatch => {
     dispatch(loginFailure());
     throw new SubmissionError({ _error: 'Nombre de usuario y contraseña no coinciden' });
   }
-  dispatch(isLogged(ok));
 };
 
 const logged = () => async dispatch => {
+  dispatch(validateSession());
   const token = await LocalStoreService.getValue('token');
   AuthService.setToken(token);
   dispatch(isLogged(!!token));

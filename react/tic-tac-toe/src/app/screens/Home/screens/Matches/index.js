@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import Spinner from 'react-spinkit';
 import PropTypes from 'prop-types';
 
-import matchesActions from '../../../redux/Matches/actions';
+import matchesActions from '../../../../../redux/Matches/actions';
 
 import styles from './styles.module.scss';
 
@@ -22,6 +22,7 @@ class Matches extends Component {
           <div className={styles.headCell}>Winner</div>
         </div>
         <div className={styles.body}>
+          {/* eslint-disable-line react/jsx-no-extra-parens */}
           {data.length ? (
             data.map(match => (
               <div className={styles.match} key={match.id}>

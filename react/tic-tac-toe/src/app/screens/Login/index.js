@@ -18,10 +18,6 @@ function Login({ handleSubmit, isLogged }) {
   );
 }
 
-const mapStateToProps = ({ user: { isLogged } }) => ({
-  isLogged
-});
-
 const mapDispatchToProps = dispatch => ({
   handleSubmit: data => dispatch(userActions.login(data))
 });
@@ -32,6 +28,6 @@ Login.propTypes = {
 };
 
 export default connect(
-  mapStateToProps,
+  null,
   mapDispatchToProps
 )(Login);
