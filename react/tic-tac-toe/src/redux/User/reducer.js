@@ -12,8 +12,8 @@ function reducer(state = defaultState, action) {
     case actions.VALIDATE_SESSION:
       return { ...state, loading: action.payload.loading };
     case actions.SUCCESS_LOGIN:
-      return { ...state, isLogged: action.payload.isLogged };
     case actions.FAILURE_LOGIN:
+    case actions.LOGOUT:
       return { ...state, isLogged: action.payload.isLogged };
     default:
       return state;

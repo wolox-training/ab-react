@@ -5,26 +5,33 @@ import { Redirect } from 'react-router-dom';
 
 import userActions from '../../../redux/User/actions';
 
+import styles from './styles.module.scss';
 import FormLogin from './components/FormLogin/FormLogin';
 
-function Login({ handleSubmit, isLogged }) {
+function Login({ handleSubmit, handleLogout, isLogged, location: { state } }) {
+  if (state && state.logout) {
+    handleLogout();
+  }
   return isLogged ? (
     <Redirect to="/matches" />
   ) : (
-    <>
+    <div className={styles.container}>
       <div>Welcome</div>
-      <FormLogin onSubmit={handleSubmit} />
-    </>
+      <FormLogin className={styles.form} onSubmit={handleSubmit} />
+    </div>
   );
 }
 
 const mapDispatchToProps = dispatch => ({
-  handleSubmit: data => dispatch(userActions.login(data))
+  handleSubmit: data => dispatch(userActions.login(data)),
+  handleLogout: () => dispatch(userActions.logout())
 });
 
 Login.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
-  isLogged: PropTypes.bool
+  handleLogout: PropTypes.func,
+  isLogged: PropTypes.bool,
+  location: PropTypes.objectOf(PropTypes.any)
 };
 
 export default connect(

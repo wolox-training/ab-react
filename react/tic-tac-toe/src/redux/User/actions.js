@@ -7,12 +7,18 @@ export const actions = {
   SUCCESS_LOGIN: '@@USER/SUCCESS_LOGIN',
   FAILURE_LOGIN: '@@USER/FAILURE_LOGIN',
   IS_LOGGED: '@@USER/IS_LOGGED',
+  LOGOUT: '@@USER/LOGOUT',
   VALIDATE_SESSION: '@@USER/VALIDATE_SESSION'
 };
 
 const loginSuccess = () => ({
   type: actions.SUCCESS_LOGIN,
   payload: { isLogged: true }
+});
+
+const logout = () => ({
+  type: actions.LOGOUT,
+  payload: { isLogged: false }
 });
 
 const validateSession = () => ({
@@ -30,7 +36,7 @@ const isLogged = value => ({
   payload: { isLogged: value, loading: false }
 });
 
-const login = values => async dispatch => {
+const loginAction = values => async dispatch => {
   const {
     ok,
     data: { token }
@@ -46,6 +52,11 @@ const login = values => async dispatch => {
   }
 };
 
+const logoutAction = () => async dispatch => {
+  await LocalStoreService.clearStorage();
+  dispatch(logout());
+};
+
 const logged = () => async dispatch => {
   dispatch(validateSession());
   const token = await LocalStoreService.getValue('token');
@@ -53,4 +64,4 @@ const logged = () => async dispatch => {
   dispatch(isLogged(!!token));
 };
 
-export default { login, logged };
+export default { login: loginAction, logged, logout: logoutAction };

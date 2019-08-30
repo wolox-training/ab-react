@@ -8,7 +8,6 @@ import actionsUser from '../redux/User/actions';
 
 import PrivateRoute from './components/PrivateRoute';
 import '../scss/application.scss';
-import styles from './styles.module.scss';
 import Login from './screens/Login';
 import NotMatch from './components/NotMatch';
 
@@ -20,9 +19,9 @@ class App extends Component {
   render() {
     const { loading, isLogged } = this.props;
     return (
-      <div className={styles.container}>
+      <>
         {loading ? (
-          <Spinner name="ball-scale-multiple" className={styles.spinner} />
+          <Spinner name="ball-scale-multiple" />
         ) : (
           <Switch>
             {/* eslint-disable-next-line react/jsx-no-bind */}
@@ -31,7 +30,7 @@ class App extends Component {
             <Route component={NotMatch} />
           </Switch>
         )}
-      </div>
+      </>
     );
   }
 }

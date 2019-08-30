@@ -7,10 +7,10 @@ import Input from '../../../../components/formControls/Input/index';
 
 import styles from './styles.module.scss';
 
-function FormLogin({ handleSubmit, error }) {
+function FormLogin({ handleSubmit, error, className }) {
   return (
     <>
-      <form onSubmit={handleSubmit} method="post">
+      <form className={className} onSubmit={handleSubmit} method="post">
         <Field name="email" validate={[required, email]} component={Input} label="Email" type="text" />
         <Field
           name="password"
@@ -29,6 +29,7 @@ function FormLogin({ handleSubmit, error }) {
 }
 
 FormLogin.propTypes = {
+  className: PropTypes.string,
   error: PropTypes.string,
   handleSubmit: PropTypes.func
 };

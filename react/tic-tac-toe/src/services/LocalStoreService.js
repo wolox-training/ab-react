@@ -38,7 +38,7 @@ export default class LocalStorageService {
     }
   }
 
-  clearStorage() {
+  static clearStorage() {
     if (window.localStorage) {
       window.localStorage.clear();
     }

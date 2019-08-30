@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Spinner from 'react-spinkit';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 import matchesActions from '../../../../../redux/Matches/actions';
 
@@ -22,12 +23,16 @@ class Matches extends Component {
           <div className={styles.headCell}>Winner</div>
         </div>
         <div className={styles.body}>
-          {/* eslint-disable-line react/jsx-no-extra-parens */}
+          {/* eslint-disable-next-line no-extra-parens */}
           {data.length ? (
             data.map(match => (
               <div className={styles.match} key={match.id}>
-                <div className={styles.cell}>{match.player_one}</div>
-                <div className={styles.cell}>{match.player_two}</div>
+                <div className={styles.cell}>
+                  <Link to={`/player/${match.player_one}`}>{match.player_one}</Link>
+                </div>
+                <div className={styles.cell}>
+                  <Link to={`/player/${match.player_two}`}>{match.player_two}</Link>
+                </div>
                 <div className={styles.cell}>{match.winner}</div>
               </div>
             ))
