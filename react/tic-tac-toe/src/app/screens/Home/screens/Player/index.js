@@ -58,12 +58,16 @@ class Player extends Component {
     const {
       match: {
         params: { name }
-      }
+      },
+      history: { goBack }
     } = this.props;
     return (
       <div>
         <h1 className={styles.name}>Jugador {name}</h1>
         <div className={styles.matchesInfo}>{this.lostMatches()}</div>
+        <button type="button" className={styles.btnBack} onClick={goBack}>
+          Volver a la lista
+        </button>
       </div>
     );
   }
@@ -82,6 +86,7 @@ const mapDispatchToProps = dispatch => ({
 Player.propTypes = {
   data: PropTypes.arrayOf(PropTypes.object),
   getMatches: PropTypes.func,
+  history: PropTypes.objectOf(PropTypes.any),
   match: PropTypes.objectOf(PropTypes.any)
 };
 export default connect(
