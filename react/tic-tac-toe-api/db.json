@@ -17,7 +17,7 @@
     {
       "player_one": "Tic",
       "player_two": "Tac",
-      "winner": "tie",
+      "winner": "player_two",
       "createdAt": "2018-10-09T20:29:47.214Z",
       "id": 3
     },
