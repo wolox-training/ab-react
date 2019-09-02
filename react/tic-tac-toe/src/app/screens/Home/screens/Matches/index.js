@@ -27,12 +27,12 @@ class Matches extends Component {
           {data.length ? (
             data.map(match => (
               <div className={styles.match} key={match.id}>
-                <div className={styles.cell}>
-                  <Link to={`/player/${match.player_one}`}>{match.player_one}</Link>
-                </div>
-                <div className={styles.cell}>
-                  <Link to={`/player/${match.player_two}`}>{match.player_two}</Link>
-                </div>
+                <Link to={`/player/${match.player_one}`} className={styles.cell}>
+                  {match.player_one}
+                </Link>
+                <Link to={`/player/${match.player_two}`} className={styles.cell}>
+                  {match.player_two}
+                </Link>
                 <div className={styles.cell}>{match.winner}</div>
               </div>
             ))
