@@ -9,13 +9,9 @@ import styles from './styles.module.scss';
 class Player extends Component {
   componentDidMount() {
     if (!this.props.data.length) {
-      this.getData();
+      this.props.getMatches();
     }
   }
-
-  getData = () => {
-    this.props.getMatches();
-  };
 
   lostMatches = () => {
     const {
@@ -24,7 +20,7 @@ class Player extends Component {
       },
       data
     } = this.props;
-    const { won, tie, lost } = data.reduce(
+    return data.reduce(
       (acum, curr) => {
         if (curr.player_one === name || curr.player_two === name) {
           if (curr.winner === 'tie') {
@@ -39,19 +35,6 @@ class Player extends Component {
       },
       { won: 0, tie: 0, lost: 0 }
     );
-    return (
-      <>
-        <div className={styles.infoBullet}>
-          <span className={styles.infoTitle}>Ganados</span>: {won}
-        </div>
-        <div className={styles.infoBullet}>
-          <span className={styles.infoTitle}>Perdidos</span>: {lost}
-        </div>
-        <div className={styles.infoBullet}>
-          <span className={styles.infoTitle}>Empatados</span>: {tie}
-        </div>
-      </>
-    );
   };
 
   render() {
@@ -61,10 +44,23 @@ class Player extends Component {
       },
       history: { goBack }
     } = this.props;
+
+    const { won, tie, lost } = this.lostMatches();
+
     return (
       <div>
         <h1 className={styles.name}>Jugador {name}</h1>
-        <div className={styles.matchesInfo}>{this.lostMatches()}</div>
+        <div className={styles.matchesInfo}>
+          <div className={styles.infoBullet}>
+            <span className={styles.infoTitle}>Ganados</span>: {won}
+          </div>
+          <div className={styles.infoBullet}>
+            <span className={styles.infoTitle}>Perdidos</span>: {lost}
+          </div>
+          <div className={styles.infoBullet}>
+            <span className={styles.infoTitle}>Empatados</span>: {tie}
+          </div>
+        </div>
         <button type="button" className={styles.btnBack} onClick={goBack}>
           Volver a la lista
         </button>
@@ -73,8 +69,8 @@ class Player extends Component {
   }
 }
 
-const mapStateToProps = ({ matches: { data } }) => ({
-  data
+const mapStateToProps = state => ({
+  data: state.matches.data
 });
 
 const mapDispatchToProps = dispatch => ({
