@@ -75,15 +75,30 @@ const logged = () => async dispatch => {
   payload: { isLogged: value }
 }); */
 
+const logged = () => ({
+  type: actions.VALIDATE_SESSION,
+  target: 'isLogged',
+  payload: { isLogged: !!LocalStoreService.getValue('token') }
+});
+
+const isLogged = value => ({
+  type: actions.VALIDATE_SESSION,
+  target: 'isLogged',
+  payload: { isLogged: value }
+});
+
 const loginAction = values => ({
   type: actions.LOGIN,
-  target: 'isLogged',
+  target: 'token',
   service: AuthService.login,
   payload: values,
   successSelector: response => response.data.token,
   injections: [
     withPostSuccess((dispatch, response) => {
+      const localStore = new LocalStoreService();
+      localStore.setValue('token', response);
       AuthService.setToken(response);
+      dispatch(isLogged(true));
     }),
     withPostFailure(() => {
       throw new SubmissionError({ _error: 'Nombre de usuario y contraseña no coinciden' });
@@ -96,11 +111,5 @@ const loginAction = values => ({
   target: 'user',
   payload: { loading: true }
 }); */
-
-const logged = () => ({
-  type: actions.VALIDATE_SESSION,
-  target: 'isLogged',
-  payload: { isLogged: !!LocalStoreService.getValue('token') }
-});
 
 export default { login: loginAction, logged };

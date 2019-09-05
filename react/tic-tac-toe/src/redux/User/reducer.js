@@ -4,7 +4,8 @@ import { createReducer, completeState, completeReducer } from 'redux-recompose';
 import { actions } from './actions';
 
 const defaultState = completeState({
-  isLogged: false
+  isLogged: false,
+  token: null
 });
 
 /* function reducer(state = defaultState, action) {
