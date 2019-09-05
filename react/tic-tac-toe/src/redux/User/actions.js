@@ -4,14 +4,8 @@ import { completeTypes, createTypes, withPostFailure, withPostSuccess } from 're
 import AuthService from '../../services/AuthService';
 import LocalStoreService from '../../services/LocalStoreService';
 
-const types = completeTypes(['LOGIN'], ['VALIDATE_SESSION']);
+const types = completeTypes(['LOGIN'], ['VALIDATE_SESSION', 'LOGOUT']);
 export const actions = createTypes(types, '@@USER');
-
-/* const logoutAction = () => async dispatch => {
-  await LocalStoreService.clearStorage();
-  dispatch(logout());
-};
-*/
 
 const isLogged = value => ({
   type: actions.VALIDATE_SESSION,
@@ -25,6 +19,14 @@ const logged = () => {
     type: actions.VALIDATE_SESSION,
     target: 'isLogged',
     payload: { isLogged: !!token, token }
+  };
+};
+
+const logoutAction = () => {
+  LocalStoreService.clearStorage();
+  return {
+    type: actions.LOGOUT,
+    target: 'isLogged'
   };
 };
 
@@ -48,4 +50,4 @@ const loginAction = values => ({
   ]
 });
 
-export default { login: loginAction, logged };
+export default { login: loginAction, logged, logout: logoutAction };

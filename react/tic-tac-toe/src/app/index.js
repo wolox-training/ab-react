@@ -32,7 +32,6 @@ class App extends Component {
 }
 
 const mapStateToProps = state => ({
-  tokenLoading: state.user.tokenLoading,
   isLogged: state.user.isLogged
 });
 
@@ -42,7 +41,6 @@ const mapDispatchToProps = dispatch => ({
 
 App.propTypes = {
   isLogged: PropTypes.bool,
-  loading: PropTypes.bool,
   logged: PropTypes.func
 };
 
