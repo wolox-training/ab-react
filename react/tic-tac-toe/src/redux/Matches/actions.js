@@ -14,7 +14,7 @@ const getMatches = () => ({
   type: actions.GET_MATCHES
 });
 
-const fetchMatches = () => async (dispatch) => {
+const fetchMatches = () => async dispatch => {
   dispatch(getMatches());
   const { ok, data } = await MatchesService.getMatches();
   if (ok) {

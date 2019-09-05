@@ -1,0 +1,29 @@
+@import '../../../../../scss/colors.scss';
+
+.name {
+  color: $black;
+  font-size: 25px;
+  font-weight: bold;
+  padding: 20px 0;
+  text-align: center;
+  width: 100%;
+}
+
+.matches-info {
+  display: flex;
+  justify-content: center;
+}
+
+.info-bullet {
+  margin: 0 10px;
+}
+
+.info-title {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.btn-back {
+  color: $blue;
+  font-weight: bold;
+}
