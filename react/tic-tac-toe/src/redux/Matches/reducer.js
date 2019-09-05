@@ -1,5 +1,6 @@
-import { createReducer } from 'redux-recompose';
+import { createReducer, completeState, completeReducer } from 'redux-recompose';
 
+import { actions } from './actions';
 // import { actions } from './actions';
 
 /* const defaultState = {
@@ -15,11 +16,12 @@ function reducer(state = defaultState, action) {
   }
 } */
 
+const defaultState = completeState({
+  data: []
+});
+
 const reducerDescription = {
-  LOAD_MATCHES: (state, action) => ({
-    ...state,
-    [action.target]: action.payload.data
-  })
+  primaryActions: [actions.MATCHES]
 };
 
-export default createReducer([], reducerDescription);
+export default createReducer(defaultState, completeReducer(reducerDescription));

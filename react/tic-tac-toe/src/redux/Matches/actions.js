@@ -1,4 +1,4 @@
-import { createTypes } from 'redux-recompose';
+import { createTypes, completeTypes } from 'redux-recompose';
 
 import MatchesService from '../../services/MatchesService';
 
@@ -8,7 +8,8 @@ import MatchesService from '../../services/MatchesService';
 };
  */
 
-export const actions = createTypes(['GET_MATCHES', 'LOAD_MATCHES'], '@@MATCHES');
+const types = completeTypes(['MATCHES']);
+export const actions = createTypes(types, '@@MATCHES');
 
 /* const loadMatches = data => ({
   type: actions.LOAD_MATCHES,
@@ -17,9 +18,9 @@ export const actions = createTypes(['GET_MATCHES', 'LOAD_MATCHES'], '@@MATCHES')
 }); */
 
 const getMatches = () => ({
-  type: actions.GET_MATCHES,
-  target: 'matches',
-  payload: MatchesService.getMatches()
+  type: actions.MATCHES,
+  target: 'data',
+  service: MatchesService.getMatches
 });
 
 /* const fetchMatches = () => async dispatch => {

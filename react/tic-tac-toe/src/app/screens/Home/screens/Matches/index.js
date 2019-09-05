@@ -49,7 +49,7 @@ const mapStateToProps = ({ matches: { data } }) => ({ data });
 
 const mapDispatchToProps = dispatch => ({
   getMatches: () => {
-    dispatch(matchesActions.fetchMatches());
+    dispatch(matchesActions.getMatches());
   }
 });
 
