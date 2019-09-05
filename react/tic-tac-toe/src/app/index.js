@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Route, Switch, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import Spinner from 'react-spinkit';
 
 import actionsUser from '../redux/User/actions';
 
@@ -17,19 +16,16 @@ class App extends Component {
   }
 
   render() {
-    const { tokenLoading, isLogged } = this.props;
+    const { isLogged } = this.props;
+
     return (
       <>
-        {!tokenLoading && isLogged ? (
-          <Switch>
-            {/* eslint-disable-next-line react/jsx-no-bind */}
-            <Route exact path="/" render={props => <Login {...props} isLogged={isLogged} />} />
-            <PrivateRoute isLogged={isLogged} />
-            <Route component={NotMatch} />
-          </Switch>
-        ) : (
-          <Spinner name="ball-scale-multiple" />
-        )}
+        <Switch>
+          {/* eslint-disable-next-line react/jsx-no-bind */}
+          <Route exact path="/" render={props => <Login {...props} isLogged={isLogged} />} />
+          <PrivateRoute isLogged={isLogged} />
+          <Route component={NotMatch} />
+        </Switch>
       </>
     );
   }

@@ -29,7 +29,11 @@ const defaultState = completeState(
 const reducerDescription = {
   primaryActions: [actions.LOGIN],
   override: {
-    [actions.VALIDATE_SESSION]: (state, action) => ({ ...state, isLogged: action.payload.isLogged })
+    [actions.VALIDATE_SESSION]: (state, action) => ({
+      ...state,
+      isLogged: action.payload.isLogged,
+      token: action.payload.token
+    })
   }
 };
 
