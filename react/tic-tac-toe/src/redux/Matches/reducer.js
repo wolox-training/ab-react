@@ -1,6 +1,8 @@
-import { actions } from './actions';
+import { createReducer } from 'redux-recompose';
 
-const defaultState = {
+// import { actions } from './actions';
+
+/* const defaultState = {
   data: []
 };
 
@@ -11,6 +13,13 @@ function reducer(state = defaultState, action) {
     default:
       return state;
   }
-}
+} */
 
-export default reducer;
+const reducerDescription = {
+  LOAD_MATCHES: (state, action) => ({
+    ...state,
+    [action.target]: action.payload.data
+  })
+};
+
+export default createReducer([], reducerDescription);

@@ -1,11 +1,13 @@
+// import { actions } from './actions';
+import { createReducer, completeState, completeReducer } from 'redux-recompose';
+
 import { actions } from './actions';
 
-const defaultState = {
-  isLogged: false,
-  loading: true
-};
+const defaultState = completeState({
+  isLogged: false
+});
 
-function reducer(state = defaultState, action) {
+/* function reducer(state = defaultState, action) {
   switch (action.type) {
     case actions.IS_LOGGED:
       return { ...state, loading: action.payload.loading, isLogged: action.payload.isLogged };
@@ -18,6 +20,13 @@ function reducer(state = defaultState, action) {
     default:
       return state;
   }
-}
+} */
 
-export default reducer;
+const reducerDescription = {
+  primaryActions: [actions.LOGIN],
+  override: {
+    [actions.VALIDATE_SESSION]: (state, action) => ({ ...state, isLogged: action.payload.isLogged })
+  }
+};
+
+export default createReducer(defaultState, completeReducer(reducerDescription));

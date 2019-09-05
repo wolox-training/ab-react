@@ -3,6 +3,7 @@ import thunk from 'redux-thunk';
 import { reducer as formReducer } from 'redux-form';
 import { connectRouter, routerMiddleware } from 'connected-react-router';
 import { createBrowserHistory } from 'history';
+import { fetchMiddleware } from 'redux-recompose';
 
 import reducerMatches from './Matches/reducer';
 import reducerUser from './User/reducer';
@@ -21,6 +22,7 @@ export default function configureStore(preloadedState) {
   const store = createStore(
     createRootReducer,
     preloadedState,
-    composeEnhancers(applyMiddleware(routerMiddleware(history), thunk)));
+    composeEnhancers(applyMiddleware(routerMiddleware(history), thunk, fetchMiddleware))
+  );
   return store;
 }

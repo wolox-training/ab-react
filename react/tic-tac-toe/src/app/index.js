@@ -17,10 +17,10 @@ class App extends Component {
   }
 
   render() {
-    const { loading, isLogged } = this.props;
+    const { isLoggedLoading, isLogged } = this.props;
     return (
       <>
-        {loading ? (
+        {isLoggedLoading ? (
           <Spinner name="ball-scale-multiple" />
         ) : (
           <Switch>
@@ -35,9 +35,9 @@ class App extends Component {
   }
 }
 
-const mapStateToProps = ({ user: { loading, isLogged } }) => ({
-  loading,
-  isLogged
+const mapStateToProps = state => ({
+  isLoggedLoading: state.user.isLoggedLoading,
+  isLogged: state.user.isLogged
 });
 
 const mapDispatchToProps = dispatch => ({
