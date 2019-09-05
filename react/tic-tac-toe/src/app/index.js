@@ -17,18 +17,18 @@ class App extends Component {
   }
 
   render() {
-    const { isLoggedLoading, isLogged } = this.props;
+    const { tokenLoading, isLogged } = this.props;
     return (
       <>
-        {isLoggedLoading ? (
-          <Spinner name="ball-scale-multiple" />
-        ) : (
+        {!tokenLoading && isLogged ? (
           <Switch>
             {/* eslint-disable-next-line react/jsx-no-bind */}
             <Route exact path="/" render={props => <Login {...props} isLogged={isLogged} />} />
             <PrivateRoute isLogged={isLogged} />
             <Route component={NotMatch} />
           </Switch>
+        ) : (
+          <Spinner name="ball-scale-multiple" />
         )}
       </>
     );
@@ -36,7 +36,7 @@ class App extends Component {
 }
 
 const mapStateToProps = state => ({
-  isLoggedLoading: state.user.isLoggedLoading,
+  tokenLoading: state.user.tokenLoading,
   isLogged: state.user.isLogged
 });
 

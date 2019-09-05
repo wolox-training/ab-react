@@ -3,10 +3,13 @@ import { createReducer, completeState, completeReducer } from 'redux-recompose';
 
 import { actions } from './actions';
 
-const defaultState = completeState({
-  isLogged: false,
-  token: null
-});
+const defaultState = completeState(
+  {
+    isLogged: false,
+    token: null
+  },
+  ['isLogged']
+);
 
 /* function reducer(state = defaultState, action) {
   switch (action.type) {

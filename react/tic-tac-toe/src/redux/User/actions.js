@@ -75,16 +75,24 @@ const logged = () => async dispatch => {
   payload: { isLogged: value }
 }); */
 
-const logged = () => ({
-  type: actions.VALIDATE_SESSION,
-  target: 'isLogged',
-  payload: { isLogged: !!LocalStoreService.getValue('token') }
-});
-
 const isLogged = value => ({
   type: actions.VALIDATE_SESSION,
   target: 'isLogged',
   payload: { isLogged: value }
+});
+
+const logged = () => ({
+  type: actions.LOGIN,
+  target: 'token',
+  service: LocalStoreService.getValue,
+  successSelector: response => response.data.token,
+  payload: 'token',
+  injections: [
+    withPostSuccess((dispatch, response) => {
+      AuthService.setToken(response);
+      dispatch(isLogged(true));
+    })
+  ]
 });
 
 const loginAction = values => ({
