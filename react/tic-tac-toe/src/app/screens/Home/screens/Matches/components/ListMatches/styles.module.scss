@@ -1,0 +1,9 @@
+.cell {
+  flex: 1;
+  padding: 5px 0;
+}
+
+.match {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}

@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Spinner from 'react-spinkit';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
 
 import matchesActions from '../../../../../redux/Matches/actions';
 
 import styles from './styles.module.scss';
+import ListMatches from './components/ListMatches';
 
 class Matches extends Component {
   componentDidMount() {
@@ -14,7 +13,6 @@ class Matches extends Component {
   }
 
   render() {
-    const { data } = this.props;
     return (
       <div className={styles.table}>
         <div className={styles.head}>
@@ -23,29 +21,14 @@ class Matches extends Component {
           <div className={styles.headCell}>Winner</div>
         </div>
         <div className={styles.body}>
-          {/* eslint-disable-next-line no-extra-parens */}
-          {data.length ? (
-            data.map(match => (
-              <div className={styles.match} key={match.id}>
-                <Link to={`/player/${match.player_one}`} className={styles.cell}>
-                  {match.player_one}
-                </Link>
-                <Link to={`/player/${match.player_two}`} className={styles.cell}>
-                  {match.player_two}
-                </Link>
-                <div className={styles.cell}>{match.winner}</div>
-              </div>
-            ))
-          ) : (
-            <Spinner name="ball-scale-multiple" className={styles.spinner} />
-          )}
+          <ListMatches {...this.props} />
         </div>
       </div>
     );
   }
 }
 
-const mapStateToProps = ({ matches: { data } }) => ({ data });
+const mapStateToProps = state => ({ data: state.matches.data, dataLoading: state.matches.dataLoading });
 
 const mapDispatchToProps = dispatch => ({
   getMatches: () => {
@@ -54,8 +37,7 @@ const mapDispatchToProps = dispatch => ({
 });
 
 Matches.propTypes = {
-  getMatches: PropTypes.func.isRequired,
-  data: PropTypes.arrayOf(PropTypes.object)
+  getMatches: PropTypes.func.isRequired
 };
 
 export default connect(
