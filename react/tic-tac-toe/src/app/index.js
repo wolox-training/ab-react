@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Route, Switch, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import Spinner from 'react-spinkit';
 
 import actionsUser from '../redux/User/actions';
 
@@ -17,27 +16,23 @@ class App extends Component {
   }
 
   render() {
-    const { loading, isLogged } = this.props;
+    const { isLogged } = this.props;
+
     return (
       <>
-        {loading ? (
-          <Spinner name="ball-scale-multiple" />
-        ) : (
-          <Switch>
-            {/* eslint-disable-next-line react/jsx-no-bind */}
-            <Route exact path="/" render={props => <Login {...props} isLogged={isLogged} />} />
-            <PrivateRoute isLogged={isLogged} />
-            <Route component={NotMatch} />
-          </Switch>
-        )}
+        <Switch>
+          {/* eslint-disable-next-line react/jsx-no-bind */}
+          <Route exact path="/" render={props => <Login {...props} isLogged={isLogged} />} />
+          <PrivateRoute isLogged={isLogged} />
+          <Route component={NotMatch} />
+        </Switch>
       </>
     );
   }
 }
 
-const mapStateToProps = ({ user: { loading, isLogged } }) => ({
-  loading,
-  isLogged
+const mapStateToProps = state => ({
+  isLogged: state.user.isLogged
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -46,7 +41,6 @@ const mapDispatchToProps = dispatch => ({
 
 App.propTypes = {
   isLogged: PropTypes.bool,
-  loading: PropTypes.bool,
   logged: PropTypes.func
 };
 
