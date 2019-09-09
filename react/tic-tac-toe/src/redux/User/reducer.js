@@ -1,4 +1,3 @@
-// import { actions } from './actions';
 import { createReducer, completeState, completeReducer } from 'redux-recompose';
 
 import { actions } from './actions';
