@@ -21,14 +21,3 @@
   overflow-y: auto;
   position: relative;
 }
-
-.match {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-}
-
-.spinner {
-  left: 50%;
-  position: absolute;
-  top: 50%;
-}
